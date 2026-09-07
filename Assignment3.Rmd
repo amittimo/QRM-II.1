@@ -23,6 +23,16 @@ format:
   html:
     code-overflow: wrap
 ---
+```{r setup packages, include=FALSE}
+install.packages(c("knitr", "rmarkdown", "tidyverse", "moments", "car"))
+```
+
+```{r setup library packages, include=FALSE}
+# Laad hier alle benodigde packages in voor het hele project
+library(tidyverse)
+library(moments)
+library(car)
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -63,7 +73,7 @@ We encourage you to keep your code blocks, printing statements, and final answer
 
 ```{r}
 #WRITE YOUR CODE HERE
-
+movies <- read_tsv("data/movies5.tsv")
 ```
 
 **Your Answer:**
@@ -346,196 +356,3 @@ Write your formulated response here.
 #WRITE YOUR CODE HERE
 
 ```
-
-# Week 4 
-
-1. There is an argument going on in the movie studio. *Bob* claims that production budgets are getting out of hand, and that the studio should focus on making cheaper movies. *Chantal* disagrees. She tells Bob that ``Every dollar we spend on movie production is more than offset by the increase in movie revenue''. 
-
-a. Set up a regression model to test Chantal's claim, and estimate it. That is, estimate: $$\text{Revenue}_i=\beta_0+\beta_1 \text{Budget}_i +\varepsilon_i.$$ Print a summary of your estimated model. \textbf{[2 points]}
-b. What is the estimated value of $\beta_1$ and how do you interpet it? \textbf{[2 points]}
-c. Test for the null hypothesis that $\beta_1 \leq 1$. Report the p-value and state your conclusion. \textbf{[2 points]} 
-d. Next, estimate the model $$\text{Log Revenue}_i=\beta_0+\beta_1 \text{Log Budget}_i +\varepsilon_i.$$ When creating the variables Log Revenue and Log Budget, make sure that movies with a Revenue or Budget of zero are assigned the value "NA". Print a summary of your estimated model.  \textbf{[2 points]}
-e. What is the estimated value of $\beta_1$ and how do you interpet it? \textbf{[2 points]}
-f. Which model has better fit? The level-level model or the log-log model? Explain. \textbf{[2 points]}
-g. Who do you think is correct? Bob or Chantal? What would you advise the movie studio to do? \textbf{[2 points]}
-
-*step a*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step b*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step c*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step d*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step e*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step f*
-
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step g*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-2
-
-a. Make a scatterplot with log revenue on the y-axis, and log budget on the x-axis. Within the same scatterplot, draw a straight line which summarizes the association between the log of revenue and log of budget. \textbf{[3 points]} 
-b. Using the insights from the scatterplot, your linear model, and your data, find an example of a movie that vastly overperformed. That means, find a movie that had much more revenue than expected, given its budget. For this movie, report its log of revenue, its predicted log of revenue, and its residual. \textbf{[3 points]}
-
-*step a*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step b*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-# Week 5
-
-a. Make a frequency table of the variable genre. Which are the three genres that occur the most? \textbf{[2 points]}
-b. Create a new variable called genre2. Make sure that the three most popular genres remain the same, but that all the other genres get categorized into one genre called “Other”. Report a frequency table of this new variable genre2. \textbf{[2 points]} 
-c. Estimate an OLS model which has as dependent variable the log of revenue of a movie, and as independent variable the log of budget, a dummy for each level that genre2 can take, and the year of release. Show a summary of the resulting model and interpret each coefficient. \textbf{[4 points]}
-
-The movie studio that you work at is releasing a new movie in 2026. It will be a Drama movie with a budget of 20,000,0000. It will have a runtime of 120 minutes. 
-
-d. Estimate a model that is able to predict the revenue of this movie. Give its predicted revenue and include a 90% prediction interval. \textbf{[5 points]}
-e. Plot the residuals against various independent variables in the model. Do you find any evidence of heteroskedasticity? \textbf{[2 points]}
-f. One executive at the studio wants to time the release of the movie to a specific month of the year such that they can maximize revenue. Another executive is of the opinion that the month in which the movie is released will not have a big impact on its revenue. Estimate a model that can test whether the month of release impacts the revenue of a movie. Use an appropriate hypothesis test to test whether month of release matters. What would you advise the movie studio regarding the timing of the release of the movie? \textbf{[5 points]}
-
-*step a*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step b*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step c*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step d*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step e*
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
-**Your Answer:**
-
-Write your formulated response here.
-
-*step f*
-
-
-```{r}
-#WRITE YOUR CODE HERE
-
-```
-
