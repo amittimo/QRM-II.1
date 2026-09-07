@@ -24,17 +24,19 @@ format:
     code-overflow: wrap
 ---
 ```{r setup packages, include=FALSE}
+# Download eenmalig deze packages wanneer je dit voor het eerst opent. Hierna nooit meer!
 install.packages(c("knitr", "rmarkdown", "tidyverse", "moments", "car"))
 ```
 
 ```{r setup library packages, include=FALSE}
-# Laad hier alle benodigde packages in voor het hele project
+# Laad hier alle benodigde packages in voor het hele project, dit moet elke x als je het document opent.
 library(tidyverse)
 library(moments)
 library(car)
 ```
 
 ```{r setup, include=FALSE}
+# Deze code zat in de template, hierdoor is de code te zien in het eindwerk.
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
