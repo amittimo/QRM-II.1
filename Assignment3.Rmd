@@ -76,6 +76,7 @@ We encourage you to keep your code blocks, printing statements, and final answer
 ```{r}
 #WRITE YOUR CODE HERE
 movies <- read_tsv("data/movies5.tsv")
+movies5 <- movies 
 ```
 
 **Your Answer:**
@@ -181,7 +182,7 @@ Write your formulated response here.
 # Week 2 
 1 Is your dataset movies5.tsv the full population, or is it a sample of a larger population? If the latter, how would you describe the full population? \textbf{[4 points]}
 
-*Your answer here:*
+*it is a sample from a larger population. if it were a full population, the movies would be registered in a dataset named imdb/tmdb.:*
 
 Write your formulated response here.
 
@@ -197,67 +198,100 @@ e. Using the formulas of the *Central Limit Theorem*, give the distribution of t
 *Step a*
 
 ```{r}
-#WRITE YOUR CODE HERE
+#mean(movies5$vote_average)
 
 ```
 
-**Your Answer:**
+**6.011:**
 
 Write your formulated response here.
 
 *Step b*
 
 ```{r}
-#WRITE YOUR CODE HERE
+#set.seed(123)  # for reproducibility
+movies_sample <- movies5[sample(nrow(movies5), 25), ]
+mean(movies_sample$vote_average) 
 
 ```
 
-**Your Answer:**
+**5.924:**
 
-Write your formulated response here.
+close to the population mean, due to sampling variability. every sample of 25 movies gives a slightly different mean. 
 
 *Step c*
 
 ```{r}
-#WRITE YOUR CODE HERE
+sample_means <- numeric(100)
+for (i in 1:100) {
+  s <- movies5[sample(nrow(movies5), 25), ]
+  sample_means[i] <- mean(s$vote_average)
+}
+head(sample_means) 
 
 ```
 
-**Your Answer:**
+**: 6.432 5.376 5.808 6.152 6.108 6.216 :**
 
-Write your formulated response here.
+these are the first printed values
 
 *Step d*
 
 ```{r}
-#WRITE YOUR CODE HERE
+summary(sample_means)
+sd(sample_means)
+hist(sample_means, main = "Distribution of sample means", xlab = "Mean vote_average") 
 
 ```
 
-**Your Answer:**
+**mean= 6.03 standard deviation=0.23 shape of distribution= bell-shaped:**
 
-Write your formulated response here.
+the mean of sample_means is nearly equal to the population mean. the standard deviation is very close to the theoretical standard error (pop. sd √25= 1.226 / 5 = 0.245)
 
 *Step e*
 
-**Your Answer:**
+**: X̄= 6.011 , N=0.245  :**
 
-Write your formulated response here.
+The central limit theorem explains that in the situation of a sample size n=25, the sample mean follows X-bar ∼ N. the expected value is the population mean of vote_average, which is 6.011. the standard deviation of the sampling distribution is 0.245. so the two sets of these values are very close to each other. this is logical since the CLT formula tells exactly what sampling distribution of the mean should look like, while the simulation in question d with 100 samples gives an empirical approximation of the same distribution. the very small difference between the values is due to the finite number of simulated numbers, instead of an infinite number of samples. when using more simulations the mean and standard deviation would get even closer to the theoretical values. 
 
 3. Is there a variable in your data set which you would expect to follow a discrete uniform distribution? Explain, without looking at the data, why you expect this data to be discrete uniform. If the data would indeed follow a discrete uniform distribution, what would you expect the mean and standard deviation of this variable to be? Next, plot a histogram of the variable, and plot an appropriate discrete uniform distribution on top of this histogram. Comment whether the variable indeed follows this expected distribution. If the distribution deviates from the discrete uniform distribution, explain why this is the case. \textbf{[6 points]}
 
-**Your Answer:**
+**expected mean= (1+31)/2 = 16 standard deviation= √(31^2 - 1)/12= √80:**
 
-Write your formulated response here.
+a good pick would be release_day. there is not a very obvious motive for studios to prefer releasing a movie on. release day should be in principle random with respect to which day in specific it falls on. so there should be discrete uniform distribution. 
 
 ```{r}
-#WRITE YOUR CODE HERE
+release_day <- movies5$release_day
+
+# theoretical values
+n <- 31
+theo_mean <- (1 + n) / 2
+theo_sd   <- sqrt((n^2 - 1) / 12)
+
+# observed values
+obs_mean <- mean(release_day)
+obs_sd   <- sd(release_day)
+
+# histogram (density scale so it's comparable to the uniform pmf)
+hist(release_day, breaks = 0:31, freq = FALSE,
+     main = "Distribution of release_day",
+     xlab = "Day of month", col = "lightblue")
+
+# overlay expected discrete uniform density (flat line at 1/31)
+abline(h = 1/31, col = "red", lwd = 2)
+legend("topright", legend = "Expected Discrete Uniform(1,31)",
+       col = "red", lwd = 2, bty = "n")
+
+theo_mean; theo_sd
+obs_mean; obs_sd
 
 ```
 
-**Your Answer:**
+**mean= 15.5 ,SD= 8.7:**
 
-Write your formulated response here.
+the values of the observed mean and SD again come close to the theoretical values (mean=16, SD= 8.94). the distribution is almost flat, however there are two deviations looking at the histogram. 
+1: there is a sharp spike at day 1. day 1 is more noticeable than any other day, which is called a data artifact. it means that when exact release dates are not known by databases, they refer to the first of the month, inflating the bar. 
+2: fewer counts on days 29-31. this is a structural observation since not every month has 29,30 or 31 days. higher day numbers have fewer opportunities to occur during a year, leading to a distribution which is slightly away from a perfect uniform shape. 
 
 # Week 3 
 
