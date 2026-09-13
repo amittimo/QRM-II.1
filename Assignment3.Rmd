@@ -74,19 +74,24 @@ We encourage you to keep your code blocks, printing statements, and final answer
 1.  Find the dataset “movies5.tsv” on Canvas. Describe your data set: How many observations does it have. How many variables are there? How many subjects? What consists of a subject? \textbf{[4 points]}
 
 ```{r}
-#WRITE YOUR CODE HERE
-movies <- read_tsv("data/movies5.tsv")
-movies5 <- movies 
+movies <- read_tsv("Data/movies5.tsv")
+movies5 <- movies
+
+dim(movies5)
+n_distinct(movies5$title)
 ```
 
 **Your Answer:**
+It has 909 observations, 19 variables and 909 subjects. One subject is equal to one film in this dataset. Every row in the  dataset stands for one film and that subject is described using 19 variables. There are 909 subjects because there is no film that appears twice in the dataset. 
 
-Write your response here.
 
 2. Which of the following types of variables are present in your data set? (i) nominal; (ii) ordinal; (iii); continuous; (iv) discrete. If present, name one example of such a variable present in your data set. \textbf{[4 points]}
 
 ```{r answer 2}
 #WRITE YOUR CODE HERE
+```{r answer 2}
+sapply(movies5, class)
+```
 
 ```
 
