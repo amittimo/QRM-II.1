@@ -88,16 +88,13 @@ It has 909 observations, 19 variables and 909 subjects. One subject is equal to 
 2. Which of the following types of variables are present in your data set? (i) nominal; (ii) ordinal; (iii); continuous; (iv) discrete. If present, name one example of such a variable present in your data set. \textbf{[4 points]}
 
 ```{r answer 2}
-#WRITE YOUR CODE HERE
-```{r answer 2}
 sapply(movies5, class)
-```
-
 ```
 
 **Your Answer:**
 
-Write your response here.
+(i) nominal is present in our dataset, for example the genre. (iii) continuous is also present, for example the popularity of the movie.  (iv) discrete is also present, vote_count is a discrete variable. 
+
 
 3. A movie studio wants to know which types of movies give maximal revenue. Perform the following steps to provide the movie studio with an analysis which corresponds to their request:
 
@@ -114,10 +111,9 @@ Each week consists of 1, 2, or 3 subquestions. The total amount of points you ca
 
 *Step a*
 
+
 ```{r}
-
-#WRITE YOUR CODE HERE
-
+summary(movies5$revenue)
 ```
 
 **Your Answer:**
@@ -127,9 +123,12 @@ Write your formulated response here.
 *Step b*
 
 ```{r}
+movies5$title[which.max(movies5$revenue)]
+max(movies5$revenue)
 
-#WRITE YOUR CODE HERE
-
+movies5$title[which.min(movies5$revenue)]
+min(movies5$revenue)
+sum(movies5$revenue == 0)
 ```
 
 **Your Answer:**
@@ -139,9 +138,11 @@ Write your formulated response here.
 *Step c*
 
 ```{r}
-
-#WRITE YOUR CODE HERE
-
+hist(movies5$revenue,
+     main = "Distribution of movie revenue",
+     xlab = "Revenue (US dollars)",
+     ylab = "Number of movies",
+     col = "lightblue")
 ```
 
 **Your Answer:**
@@ -151,9 +152,10 @@ Write your formulated response here.
 *Step d*
 
 ```{r}
+movies5$log_revenue <- log(movies5$revenue)
 
-#WRITE YOUR CODE HERE
-
+sum(is.infinite(movies5$log_revenue))
+mean(movies5$log_revenue)
 ```
 
 **Your Answer:**
@@ -163,9 +165,14 @@ Write your formulated response here.
 *Step e*
 
 ```{r}
+movies5$log_revenue[movies5$revenue == 0] <- NA
+mean(movies5$log_revenue, na.rm = TRUE)
 
-#WRITE YOUR CODE HERE
-
+hist(movies5$log_revenue,
+     main = "Distribution of log revenue",
+     xlab = "Log of revenue",
+     ylab = "Number of movies",
+     col = "lightblue")
 ```
 
 **Your Answer:**
@@ -175,9 +182,11 @@ Write your formulated response here.
 *Step f*
 
 ```{r}
+skewness(movies5$revenue)
+kurtosis(movies5$revenue)
 
-#WRITE YOUR CODE HERE
-
+skewness(movies5$log_revenue, na.rm = TRUE)
+kurtosis(movies5$log_revenue, na.rm = TRUE)
 ```
 
 **Your Answer:**
