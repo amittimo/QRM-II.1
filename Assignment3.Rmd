@@ -118,7 +118,7 @@ summary(movies5$revenue)
 
 **Your Answer:**
 
-Mean: 88846314.90
+Mean: 888463145
 Median: 25482931
 Maximum: 1156730962
 Minimum: 0
