@@ -150,8 +150,8 @@ hist(movies5$revenue,
 ```
 
 **Your Answer:**
-
-Write your formulated response here.
+The shape of the histogram: It is right-skewed with a long right tail.  The Mean is far above the median because most movies perform under the mean and only 2.5 percent of the revenue belongs to the lower half.  
+What this tells us about the nature of making movies is that it is risky, unpredictable and only a number of movies carry the whole industry. 91 films earn 55 percent of all revenue.
 
 *Step d*
 
@@ -164,7 +164,8 @@ mean(movies5$log_revenue)
 
 **Your Answer:**
 
-Write your formulated response here.
+There are 257 films that have 0 revenue and their log revenue becomes -inf. The mean of the new variable is -inf, this is because when a movie has 0 revenue it is equal to log(0) -> -Inf. Therefor when there is one -inf in the sum for calculating the mean it is still -inf.
+
 
 *Step e*
 
@@ -180,8 +181,9 @@ hist(movies5$log_revenue,
 ```
 
 **Your Answer:**
+The mean of log of revenue 17.54381. The mean only covers films with revenue above 0. The shape of this histogram is left-skewed, talles bars are on the right of the x-as between 16 and 20 and a long thin tail runs to the left to about 2.
 
-Write your formulated response here.
+For the variables revenue and log of revenue calculate their skewness and kurtosis. How do these numbers relate to the shape of the histograms that you estimated under d.) and e.)? \textbf{[2 points]}
 
 *Step f*
 
@@ -195,7 +197,7 @@ kurtosis(movies5$log_revenue, na.rm = TRUE)
 
 **Your Answer:**
 
-Write your formulated response here.
+For the revenue variable the skewness is positive and is 3.181042 which matches the right skewed histogram of step c. The log revenue skewness is -2.514868 and is negative which matches the left skewed histogram of e. The revenue kurtosis is 14.82708 and the log revenue kurtosis is 15.41509. Both have kurtosis of around 15 which is far above the 3 which is the reference point for normal distribution which explains the graph of both. Both graphs are highly concentrated at the right or the left.  
 
 # Week 2 
 1 Is your dataset movies5.tsv the full population, or is it a sample of a larger population? If the latter, how would you describe the full population? \textbf{[4 points]}
