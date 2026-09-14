@@ -111,14 +111,16 @@ Each week consists of 1, 2, or 3 subquestions. The total amount of points you ca
 
 *Step a*
 
-
 ```{r}
-summary(movies5$revenue)
+mean(movies5$revenue)
+median(movies5$revenue)
+max(movies5$revenue)
+min(movies5$revenue)
 ```
 
 **Your Answer:**
 
-Mean: 888463145
+Mean: 88846315 
 Median: 25482931
 Maximum: 1156730962
 Minimum: 0
