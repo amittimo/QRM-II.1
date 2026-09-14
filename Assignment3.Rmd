@@ -118,7 +118,10 @@ summary(movies5$revenue)
 
 **Your Answer:**
 
-Write your formulated response here.
+Mean: 88846315
+Median: 25482931
+Maximum: 1156730962
+Minimum: 0
 
 *Step b*
 
@@ -133,7 +136,8 @@ sum(movies5$revenue == 0)
 
 **Your Answer:**
 
-Write your formulated response here.
+The movie with the highest revenue is 'Minions' and it has a revenue of 1156730962.
+The movie with the lowest revenue is 'The Brothers McMullen" and this movie has no revenue, it is equal to zero. 
 
 *Step c*
 
