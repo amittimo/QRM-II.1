@@ -118,7 +118,7 @@ summary(movies5$revenue)
 
 **Your Answer:**
 
-Mean: 88846315
+Mean: 88846314.90
 Median: 25482931
 Maximum: 1156730962
 Minimum: 0
@@ -181,7 +181,7 @@ hist(movies5$log_revenue,
 ```
 
 **Your Answer:**
-The mean of log of revenue 17.54381. The mean only covers films with revenue above 0. The shape of this histogram is left-skewed, talles bars are on the right of the x-as between 16 and 20 and a long thin tail runs to the left to about 2.
+The mean of log of revenue 17.54381. The mean only covers films with revenue above 0. The shape of this histogram is left-skewed, talles bars are on the right of the x-axis between 16 and 20 and a long thin tail runs to the left to about 2.
 
 
 *Step f*
