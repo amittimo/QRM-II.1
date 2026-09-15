@@ -238,7 +238,7 @@ mean(movies_sample$vote_average)
 
 **5.924:**
 
-close to the population mean, due to sampling variability. every sample of 25 movies gives a slightly different mean. 
+Close to the population mean, due to sampling variability. every sample of 25 movies gives a slightly different mean. 
 
 *Step c*
 
@@ -320,14 +320,13 @@ For the next part of the assignment, assume that the movies in your data frame a
 
 1. Give a 90 percent confidence interval for the variable *revenue*. Interpret the result. \textbf{[2 points]}
 ```{r}
-#WRITE YOUR CODE HERE
-
-
+movies <- read_tsv("Data/movies5.tsv")
+t.test(movies$revenue, conf.level = 0.90)
 ```
 
-**Your Answer:**
+**The 90% confidence interval for the movie revenue is [80,068,897 ; 97,623,733]**
 
-Write your formulated response here.
+We are 90% confident that the true population mean revenue of movies lies between $80,068,897 and $97,623,733 (approximately $80.07 million and $97.62 million)
 
 2
 
@@ -339,45 +338,82 @@ d. Assume that the variance of revenue for movies with a male director in your d
 *step a*
 
 ```{r}
-#WRITE YOUR CODE HERE
+movies %>% count(director_gender)
+
 
 ```
 
-**Your Answer:**
+**Female= 82 movies, Male= 780 movies.**
 
-Write your formulated response here.
+In our sample, 780 movies were directed by a male director and 82 mvies were directed by a female director. (for 47 movies, the director's gender was missing/NA)
 
 *step b*
 
+
 ```{r}
-#WRITE YOUR CODE HERE
+binom.test(c(780, 82), p=0.5)
 
 ```
 
-**Your Answer:**
+**95 percent confidence interval: [0.8832985, 0.9236273]**
 
-Write your formulated response here.
+Null hypothesis: p=0.5 (The probability of a movie having a male or female director is equal)
+
+Alternative hypothesis:p ≠ 0.5 (The probability of a movie having a male or female director is not equal).
+
+Significance level: 0.05
+
+RESULTS:
+p< 0.001.
+95% confidence interval: [0.883, 0.924]
+
+780 male directors out of 862 total movies 
+Sample proportion: 0.905 (90.5%)
+
+Since the p-value is far below the significance level of 0.05, we reject the null hypothesis. There is statistically significant evidence that the probability of a movie being directed by a male or female director is not equal. Male directors are significantly more common.
+
 
 *step c*
 
 ```{r}
-#WRITE YOUR CODE HERE
+movies$revenue_mil <- movies$revenue / 1000000
+var(movies$revenue_mil[movies$director_gender == "male"], na.rm = TRUE)
+var(movies$revenue_mil[movies$director_gender == "female"], na.rm= TRUE)
 
 ```
 
-**Your Answer:**
+**27072.45= the variance of the revenue of films qith a male director. 18066.64= the variance of the revenue of films with a female director**
 
-Write your formulated response here.
+The variance in revenue is higher for movies directed by male directors than for those directed by female directors. This suggests that the financial performance of male-directed movies exhibits greater dispersion around the mean revenue.
 
 *step d*
 ```{r}
-#WRITE YOUR CODE HERE
+s2_female <- var(movies$revenue_mil[movies$director_gender == "female"], na.rm = TRUE)
+n_female <- sum(!is.na(movies$revenue_mil[movies$director_gender == "female"]))
+sigma2_0 <- 27072.45
+
+df <- n_female - 1
+
+chi2_stat <- (df * s2_female) / sigma2_0
+
+p_val <- 2 * min(pchisq(chi2_stat, df), 1 - pchisq(chi2_stat, df))
+
+chi2_stat
+df
+p_val
+
 
 ```
 
-**Your Answer:**
+**Test statistic: Chi-square= 54.05. Distribution: Chi-squared distribution= 81. (degrees of freedom). The p-value is 0.0184. **
 
-Write your formulated response here.
+Null hypothesis: The variance of revenue for movies directed by female directors is equal to 27,072.45(the variance for male directors).
+
+Alternative hypothesis: The variance of revenue fot movies directed by female directors is not equal to 27,072.45.
+
+Significance level (alpha): 0.05
+
+Since the p-value (0.0184) is less than the significance level of 0.05, we reject the null hypothesis. There is statistically significant evidence that the variance of revenue for movies directed by female directors differs from the variance for movies directed by male directors.
 
 3
 
@@ -388,28 +424,79 @@ c. If you look closely at the resulting plot in b.), you will probably see that 
 *step a*
 
 ```{r}
-#WRITE YOUR CODE HERE
+library(ggplot2)
+library(dplyr)
+
+movies %>%
+  group_by(release_year) %>%
+  summarise(mean_revenue = mean(revenue_mil, na.rm = TRUE)) %>%
+  ggplot(aes(x = release_year, y = mean_revenue)) +
+  geom_point(color = "darkblue", size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(title = "Mean Movie Revenue Over Time", x = "Year",
+y = "Mean Revenue (in Millions USD)")+
+  theme_minimal()
 
 ```
 
 **Your Answer:**
-
-Write your formulated response here.
+The scatter plot displays the mean movie revenue (in millions of dollers) for each year present in the dataset. Based on the scatter plot, the revenue of movies is increasing over time. the data points and the linear trend line show a clear upward trajectory across the years, indicating that average movie revenues have grown higher in more recent years.
 
 *step b*
 
 ```{r}
-#WRITE YOUR CODE HERE
+library(dplyr)
+library(ggplot2)
 
+yearly_stats <- movies %>%
+  group_by(release_year) %>%
+  summarise(
+    mean_revenue = mean(revenue_mil, na.rm = TRUE),
+    sd_revenue = sd(revenue_mil, na.rm = TRUE),
+    n = n(),
+    se = sd_revenue / sqrt(n),
+    ci_lower = mean_revenue - 1.96 * se,
+    ci_upper = mean_revenue + 1.96 * se
+  )
+
+ggplot(yearly_stats, aes(x = release_year, y = mean_revenue)) +
+  geom_point(color = "darkblue", size = 2) +
+  geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.3, color = "darkblue") +
+  labs(
+    title = "Mean Movie Revenue Over Time with 95% Confidence Intervals",
+    x = "Year",
+    y = "Mean Revenue (in Millions USD)"
+  ) +
+  theme_minimal()
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The scatter plot has been recreated to plot the mean movie revenue (in millions USD) against the release year, with error bars representing the 95% confidence intervals for each year's sample mean.
+The vertical error bars illustrate the precision and variability of the mean revenue estimates over time, where wider intervals reflect greater variance or smaller sample sizes in specific years.
 
 *step c*
 
 ```{r}
-#WRITE YOUR CODE HERE
+library(dplyr)
+
+yearly_checks <- movies %>%
+  group_by(release_year) %>%
+  summarise(
+    n_movies = n(),
+    sd_revenue = sd(revenue_mil, na.rm = TRUE),
+    se_revenue = sd_revenue / sqrt(n_movies),
+    ci_width = 2 * 1.96 * se_revenue
+  ) %>%
+  arrange(desc(ci_width))
+
+head(yearly_checks)
 
 ```
+The width of a 95% confidence interval for the population mean depends on the standard error, which is calculated as SE = s/square root of n. There are two primary statistical reasons why a confidence interval in a given year can be particularly wide:
+
+1. A smaller number of observed movies in a specific year decreases the denominator. So, less observations results in a wider confidence interval.
+
+2. Higher variability or the presence of extreme box-office outliers in a given year increases the sample standard deviation.
+
+Looking closely at the number per year, you can see that the wide intervals in years like 2012 and 2016 come down to two main things: the sample size (n) and how spread out the revenue numbers are. in those specific years, there weren't as many movies recorded in the dataset, which automatically makes the standard error bigger. On top of that, a few huge blockbuster movies made way more than tje rest, which pulled up the standard deviation and made the confidence intervals even wider.
