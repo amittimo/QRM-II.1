@@ -1,11 +1,12 @@
 ---
 title: "QRM II Graded Assignment (3)"
 subtitle: "Period 1, 2026"
-author: "Fill in your group number and names here"
+author: "Younes Maach, David van der Beek, Daan van der Ree, Edo Ho, Timo Bekkema , group 18"
 date:  "`r format(Sys.Date(), '%d-%m-%Y')`"
 output:
   pdf_document:
     number_sections: true
+    latex_engine: xelatex 
   html_document:
     df_print: paged
 
@@ -25,7 +26,7 @@ format:
 ---
 ```{r setup packages, include=FALSE}
 # Download eenmalig deze packages wanneer je dit voor het eerst opent. Hierna nooit meer!
-install.packages(c("knitr", "rmarkdown", "tidyverse", "moments", "car"))
+#install.packages(c("knitr", "rmarkdown", "tidyverse", "moments", "car"))
 ```
 
 ```{r setup library packages, include=FALSE}
@@ -205,7 +206,7 @@ For the revenue variable the skewness is positive and is 3.181042 which matches 
 
 *it is a sample from a larger population. if it were a full population, the movies would be registered in a dataset named imdb/tmdb.:*
 
-Write your formulated response here.
+there have been arguably hundreds of thousands of movies created throughout history. 909 is too little to represent every movie ever made.
 
 
 2 For this question, you will assume that your data set is the full population. 
@@ -225,7 +226,7 @@ e. Using the formulas of the *Central Limit Theorem*, give the distribution of t
 
 **6.011:**
 
-Write your formulated response here.
+see code.
 
 *Step b*
 
@@ -243,6 +244,7 @@ Close to the population mean, due to sampling variability. every sample of 25 mo
 *Step c*
 
 ```{r}
+set.seed(1)
 sample_means <- numeric(100)
 for (i in 1:100) {
   s <- movies5[sample(nrow(movies5), 25), ]
@@ -252,32 +254,33 @@ head(sample_means)
 
 ```
 
-**: 6.432 5.376 5.808 6.152 6.108 6.216 :**
+**: 6.132 6.140 5.384 6.096 5.952 6.112 :**
 
 these are the first printed values
 
 *Step d*
 
 ```{r}
+set.seed(1) 
 summary(sample_means)
 sd(sample_means)
 hist(sample_means, main = "Distribution of sample means", xlab = "Mean vote_average") 
 
 ```
 
-**mean= 6.03 standard deviation=0.23 shape of distribution= bell-shaped:**
+**mean= 6.048 standard deviation=0.2531 , shape of distribution= bell-shaped:**
 
-the mean of sample_means is nearly equal to the population mean. the standard deviation is very close to the theoretical standard error (pop. sd √25= 1.226 / 5 = 0.245)
+the mean of sample_means is nearly equal to the population mean. the standard deviation is very close to the theoretical standard error (pop. sd = 1.226 / 5 = 0.245)
 
 *Step e*
 
-**: X̄= 6.011 , N=0.245  :**
+**: x bar= 6.011 , N=0.245  :**
 
-The central limit theorem explains that in the situation of a sample size n=25, the sample mean follows X-bar ∼ N. the expected value is the population mean of vote_average, which is 6.011. the standard deviation of the sampling distribution is 0.245. so the two sets of these values are very close to each other. this is logical since the CLT formula tells exactly what sampling distribution of the mean should look like, while the simulation in question d with 100 samples gives an empirical approximation of the same distribution. the very small difference between the values is due to the finite number of simulated numbers, instead of an infinite number of samples. when using more simulations the mean and standard deviation would get even closer to the theoretical values. 
+The central limit theorem explains that in the situation of a sample size n=25, the sample mean follows X-bar ~ N. the expected value is the population mean of vote_average, which is 6.011. the standard deviation of the sampling distribution is 0.245. so the two sets of these values are very close to each other. this is logical since the CLT formula tells exactly what sampling distribution of the mean should look like, while the simulation in question d with 100 samples gives an empirical approximation of the same distribution. the very small difference between the values is due to the finite number of simulated numbers, instead of an infinite number of samples. when using more simulations the mean and standard deviation would get even closer to the theoretical values. 
 
 3. Is there a variable in your data set which you would expect to follow a discrete uniform distribution? Explain, without looking at the data, why you expect this data to be discrete uniform. If the data would indeed follow a discrete uniform distribution, what would you expect the mean and standard deviation of this variable to be? Next, plot a histogram of the variable, and plot an appropriate discrete uniform distribution on top of this histogram. Comment whether the variable indeed follows this expected distribution. If the distribution deviates from the discrete uniform distribution, explain why this is the case. \textbf{[6 points]}
 
-**expected mean= (1+31)/2 = 16 standard deviation= √(31^2 - 1)/12= √80:**
+**expected mean= (1+31)/2 = 16 standard deviation= sqrt((31^2 - 1)/12)= sqrt(80):**
 
 a good pick would be release_day. there is not a very obvious motive for studios to prefer releasing a movie on. release day should be in principle random with respect to which day in specific it falls on. so there should be discrete uniform distribution. 
 
