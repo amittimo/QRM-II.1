@@ -121,7 +121,7 @@ min(movies5$revenue)
 
 **Your Answer:**
 
-The mean of the revenue is 88846315, the median is 25482931, the maximum is 1156730962 and the minimum is 0. 
+The mean of the revenue in US dollars is 88846315, the median in US dollars is 25482931, the maximum in US dollars is 1156730962 and the minimum is 0. 
 Mean: 88846315 
 Median: 25482931
 Maximum: 1156730962
