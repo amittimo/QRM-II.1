@@ -227,7 +227,7 @@ mean(movies5$vote_average)
 
 **Your answer:**
 
-the mean of vote_average across the full data set is 6.011001. 
+The mean of vote_average across the full data set is 6.011001. 
 
 *Step b*
 
@@ -240,7 +240,7 @@ mean(movies_sample$vote_average)
 
 **Your answer:**
 
-6.08 is slightly higher than the population mean, due to sampling variability. a little sample of 25 movies won't reflect the whole population.
+6.08 is slightly higher than the population mean, due to sampling variability. A little sample of 25 movies won't reflect the whole population.
 
 *Step c*
 
@@ -256,7 +256,7 @@ head(sample_means)
 
 **Your answer :**
 
-these are the first 6 of the 100 sample means. each one is the mean vote_average of a random sample of 25 movies.
+These are the first 6 of the 100 sample means. Each one is the mean vote_average of a random sample of 25 movies.
 
 *Step d*
 
@@ -269,7 +269,7 @@ hist(sample_means, main = "Distribution of sample means", xlab = "Mean vote_aver
 
 **Your answer:**
 
-the mean of sample_means (6.034)is nearly equal to the population mean(6.011). the standard deviation(0.265) is very close to the theoretical standard error (pop. sd = 1.226 / 5 = 0.245). the shape is roughly symmetric and bell shaped.
+The mean of sample_means (6.034) is nearly equal to the population mean(6.011). the standard deviation (0.265) is very close to the theoretical standard error (pop. sd = 1.226 / 5 = 0.245). the shape is roughly symmetric and bell shaped.
 
 *Step e*
 
