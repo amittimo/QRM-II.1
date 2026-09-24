@@ -122,10 +122,6 @@ min(movies5$revenue)
 **Your Answer:**
 
 The mean of the revenue in US dollars is 88,846,315, the median in US dollars is 25,482,931, the maximum in US dollars is 1,156,730,962 and the minimum is 0. 
-Mean: 88,846,315 
-Median: 25,482,931
-Maximum: 1,156,730,962
-Minimum: 0
 
 *Step b*
 
@@ -326,7 +322,14 @@ movies <- read_tsv("Data/movies5.tsv")
 t.test(movies$revenue, conf.level = 0.90)
 ```
 
-**The 90% confidence interval for the movie revenue is [80,068,897 ; 97,623,733]**
+**Your answer**
+t = 16.666, df = 908, p-value < 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+90 percent confidence interval:
+ 80068897 97623733
+sample estimates:
+mean of x 
+ 88846315 
 
 We are 90% confident that the true population mean revenue of movies lies between $80,068,897 and $97,623,733 (approximately $80.07 million and $97.62 million)
 
@@ -345,7 +348,7 @@ movies %>% count(director_gender)
 
 ```
 
-**Female= 82 movies, Male= 780 movies.**
+**Your answer**
 
 In our sample, 780 movies were directed by a male director and 82 mvies were directed by a female director. (for 47 movies, the director's gender was missing/NA)
 
@@ -357,7 +360,7 @@ binom.test(c(780, 82), p=0.5)
 
 ```
 
-**95 percent confidence interval: [0.8832985, 0.9236273]**
+**Your answer**
 
 Null hypothesis: p=0.5 (The probability of a movie having a male or female director is equal)
 
@@ -384,8 +387,9 @@ var(movies$revenue_mil[movies$director_gender == "female"], na.rm= TRUE)
 
 ```
 
-**27072.45= the variance of the revenue of films qith a male director. 18066.64= the variance of the revenue of films with a female director**
+**Your answer**
 
+27072.45= the variance of the revenue of films qith a male director. 18066.64= the variance of the revenue of films with a female director. 
 The variance in revenue is higher for movies directed by male directors than for those directed by female directors. This suggests that the financial performance of male-directed movies exhibits greater dispersion around the mean revenue.
 
 *step d*
@@ -407,7 +411,8 @@ p_val
 
 ```
 
-**Test statistic: Chi-square= 54.05. Distribution: Chi-squared distribution= 81. (degrees of freedom). The p-value is 0.0184. **
+**Your answer **
+Test statistic: Chi-square= 54.05. Distribution: Chi-squared distribution= 81. (degrees of freedom). The p-value is 0.0184.
 
 Null hypothesis: The variance of revenue for movies directed by female directors is equal to 27,072.45(the variance for male directors).
 
@@ -442,7 +447,7 @@ y = "Mean Revenue (in Millions USD)")+
 ```
 
 **Your Answer:**
-The scatter plot displays the mean movie revenue (in millions of dollers) for each year present in the dataset. Based on the scatter plot, the revenue of movies is increasing over time. the data points and the linear trend line show a clear upward trajectory across the years, indicating that average movie revenues have grown higher in more recent years.
+The scatter plot displays the mean movie revenue (in millions of dollars) for each year present in the dataset. Based on the scatter plot, the revenue of movies is increasing over time. the data points and the linear trend line show a clear upward trajectory across the years, indicating that average movie revenues have grown higher in more recent years.
 
 *step b*
 
